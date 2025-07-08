@@ -9,6 +9,9 @@ const postDetails = async ({ params }) => {
     where: {
       id: id,
     },
+    include:{
+      user: true
+    }
   });
 
   if (!post) {
@@ -32,7 +35,7 @@ const postDetails = async ({ params }) => {
           Created At: {new Date(post.createdAt).toLocaleDateString()}
         </p>
         <p className="text-slate-500 text-base mb-6">
-          Author: {post.authorId}
+          Author: {post.user.name}
         </p>
         <div className="flex gap-4">
           <Link href={`/${id}/edit`} aria-label="Edit Post">
