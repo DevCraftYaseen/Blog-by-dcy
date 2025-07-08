@@ -1,7 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Suspense } from "react"; // ✅ import Suspense
-import Navbar from "@/components/Navbar";
+import ClientWrapper from "@/components/Navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,10 +28,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-50 text-slate-900 min-h-screen`}
       >
-        {/* ✅ Wrap Navbar with Suspense to fix useSearchParams error */}
-        <Suspense fallback={<div>Loading Navbar...</div>}>
-          <Navbar />
-        </Suspense>
+        <ClientWrapper>{children}</ClientWrapper>
         <main className="max-w-6xl mx-auto px-6 py-8">{children}</main>
       </body>
     </html>
