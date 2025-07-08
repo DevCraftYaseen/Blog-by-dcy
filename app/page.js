@@ -1,17 +1,12 @@
 import { prisma } from "@/lib/prismaClient";
 import Link from "next/link";
-import { headers } from "next/headers";
 
-export default async function Home() {
-  // ✅ Get full request URL
-  const headersList = headers();
-  const fullUrl = headersList.get("x-url") || "http://localhost:3000";
-  const url = new URL(fullUrl);
-  const authorEmail = url.searchParams.get("author") || ("all");
+// Use searchParams prop instead of headers for better reliability
+export default async function Home({ searchParams }) {
+  // ✅ Get search params from Next.js props (more reliable)
+  const authorEmail = searchParams?.author || "all";
   
-
   // ✅ Query user and posts if email is provided
-
   let user = {};
 
   if (authorEmail && authorEmail.includes("all")) {
@@ -27,8 +22,6 @@ export default async function Home() {
   } else {
     user.posts = [];
   }
-
-  
 
   return (
     <section className="w-full flex flex-col gap-8 items-start">
