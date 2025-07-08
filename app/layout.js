@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Suspense } from "react"; // ✅ import Suspense
 import Navbar from "@/components/Navbar";
 
 const geistSans = Geist({
@@ -22,10 +23,15 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <title>Sample Blog</title>
-        <link rel="icon" href='./favicon.ico' type="image/x-icon" />
+        <link rel="icon" href="./favicon.ico" type="image/x-icon" />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-50 text-slate-900 min-h-screen`}>
-        <Navbar />
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-50 text-slate-900 min-h-screen`}
+      >
+        {/* ✅ Wrap Navbar with Suspense to fix useSearchParams error */}
+        <Suspense fallback={<div>Loading Navbar...</div>}>
+          <Navbar />
+        </Suspense>
         <main className="max-w-6xl mx-auto px-6 py-8">{children}</main>
       </body>
     </html>

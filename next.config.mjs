@@ -6,7 +6,3 @@ const nextConfig = {
 }
 
 export default nextConfig
-
-export const config = {
-  matcher: '/', // or ['/', '/blog/:path*'] if you want multiple pages
-}
