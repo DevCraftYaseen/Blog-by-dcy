@@ -1,6 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Suspense } from "react"; // ✅ import Suspense
+
 import ClientWrapper from "@/components/Navbar";
 
 const geistSans = Geist({
